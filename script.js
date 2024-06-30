@@ -24,27 +24,71 @@ document.addEventListener("DOMContentLoaded", function() {
             let quantidadeEnderecos = calcularQuantidadeEnderecos(quantidadeZeros);
             console.log("Quantidade de endereços válidos por sub-rede:", quantidadeEnderecos);
 
-            let tabelaResultados = calcularSubredes(enderecoZerado, mascaraBloco, quantidadeSubRedes);
+            let tabelaResultados = calcularSubredes(enderecoZerado, mascaraBloco, quantidadeSubRedes);  
+            // limpa o main 
+            let mainContainer = document.querySelector("main");
+            mainContainer.innerHTML = "";
 
-            // Limpar resultados anteriores
-            let resultados = document.querySelector("#resultados");
-            resultados.innerHTML = "";
+            // cria a tabela
+            let tabela = document.createElement("table");
+            tabela.classList.add("resultado-table");
 
-            // Gerar e exibir a tabela de resultados
-            tabelaResultados.forEach(subrede => {
-                let linha = document.createElement('div');
-                linha.textContent = `${subrede.rede} // ${subrede.hosts} // ${subrede.broadcast}`;
-                resultados.appendChild(linha);
-            });
+            let thead = document.createElement("thead");
+            let tbody = document.createElement("tbody");
+
+            let cabecalho = `
+                <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                </tr>
+            `;
+            thead.innerHTML = cabecalho;
+
+            // Linhas da tabela com os resultados calculados
+            let linhas = `
+                <tr>
+                    <td>Endereço IP com último octeto zerado</td>
+                    <td>${enderecoZerado}</td>
+                </tr>
+                <tr>
+                    <td>Endereço IP em binário</td>
+                    <td>${enderecoIPBinario}</td>
+                </tr>
+                <tr>
+                    <td>Máscara de sub-rede em binário</td>
+                    <td>${mascaraBinaria}</td>
+                </tr>
+                <tr>
+                    <td>Quantidade de bits zero na máscara</td>
+                    <td>${quantidadeZeros}</td>
+                </tr>
+                <tr>
+                    <td>Quantidade de endereços válidos por sub-rede</td>
+                    <td>${quantidadeEnderecos}</td>
+                </tr>
+            `;
+            tbody.innerHTML = linhas;
+
+            tabela.appendChild(thead);
+            tabela.appendChild(tbody);
+
+            // Adiciona a tabela no lugar do main
+            mainContainer.appendChild(tabela);
 
         } catch (error) {
-            console.error(error.message);
+            console.error(error.message); // Exibe qualquer erro no console do navegador
         }
     });
 
+
     formulario.addEventListener("reset", function(event){
-        let resultados = document.querySelector("#resultados");
-        resultados.innerHTML = ""; // Limpa os resultados ao resetar o formulário
+        let mainContainer = document.querySelector("main");
+        mainContainer.innerHTML = ""; // limpa o conteúdo do main
+        mainContainer.appendChild(formulario); 
+
+        let resultadosContainer = document.createElement("div");
+        resultadosContainer.id = "resultados";
+        mainContainer.appendChild(resultadosContainer); 
     });
 });
 
