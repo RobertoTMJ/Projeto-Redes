@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Sub-redes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>Calculador de Redes</header>
+    <main class="container">
+        <form id="formulario">
+            <div class="grupo-formulario">
+                <label for="endereco-ip">Endereço IP</label>
+                <input type="text" id="endereco-ip" placeholder="Digite o endereço IP" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="mascara">Máscara</label>
+                <input type="text" id="mascara" placeholder="Digite a máscara de rede" required>
+            </div>
+            <div class="grupo-formulario">
+                <label for="quantidade-subredes">Quantidade de Sub-redes</label>
+                <input type="number" id="quantidade-subredes" placeholder="Digite a quantidade de sub-redes" required>
+            </div>
+            <div class="grupo-botoes">
+                <button type="reset" class="reset">Limpar</button>
+                <button type="submit" class="submit">Calcular</button>
+            </div>
+        </form>
+        <div id="resultados"></div>
+    </main>
+    <footer>&#169; Criado por: Amanda Soares, Fernanda Cavali e Roberto Moriya.</footer>
+    <script src="script.js"></script>
+</body>
+</html>

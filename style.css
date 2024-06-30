@@ -1,0 +1,128 @@
+/* Variáveis de cor */
+:root {
+    --cor-fundo-header: #08050b;
+    --cor-texto-header: #ffffff;
+    --cor-fundo-body: #130417;
+    --cor-fundo-container: #ffffff;
+    --cor-sombra-container: rgba(0, 0, 0, 0.1);
+    --cor-borda-input: #ccc;
+    --cor-borda-input-focus: #662d91;
+    --cor-sombra-input-focus: rgba(102, 45, 145, 0.5);
+    --cor-botao: #5a189a;
+    --cor-botao-hover: #7b2cbf;
+    --cor-texto-botao: #ffffff;
+    --cor-fundo-footer: #23212391;
+    --cor-texto-footer: #ffffff9a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    font-size: 1.8rem;
+    height: 10vh;
+    width: 100%;
+    background-color: var(--cor-fundo-header);
+    color: var(--cor-texto-header);
+    line-height: 10vh;
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient( to bottom, var(--cor-fundo-body), var(--cor-fundo-container));
+    height: 100vh;
+    margin: 0;
+}
+
+main {
+    background-color: var(--cor-fundo-container);
+    padding: 18px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--cor-sombra-container);
+    width: 30%;
+    min-width: 300px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 16px;
+}
+
+.grupo-formulario {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--cor-borda-input);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input:focus {
+    border-color: var(--cor-borda-input-focus);
+    outline: none;
+    box-shadow: 0 0 5px var(--cor-sombra-input-focus);
+}
+
+.grupo-botoes {
+    display: flex;
+    justify-content: space-between;
+}
+
+button {
+    min-width: 10vw;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--cor-botao);
+    color: var(--cor-texto-botao);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: var(--cor-botao-hover);
+}
+
+footer {
+    width: 100%;
+    height: 5vh;
+    line-height: 5vh;
+    color: var(--cor-texto-footer);
+    background-color: var(--cor-fundo-footer);
+    text-align: center;
+}
+
+
+#resultados {
+    font-size: 0.8rem;
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-width: 600px;
+    margin-top: 20px;
+}
+#resultados div {
+    margin-bottom: 10px;
+}
+
+
+.resultado {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-bottom: 1px solid #ccc;
+}
