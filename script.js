@@ -15,12 +15,6 @@ document.addEventListener("DOMContentLoaded", function() {
         try {
             //Variáveis 
             let enderecoZerado = zerarUltimoOcteto(enderecoIP);
-            let enderecoIPBinario = converteParaBinario(enderecoZerado);
-            let mascaraBinaria = mascaraSubredeParaBinario(mascaraBloco);
-            let quantidadeZeros = contarZerosNaMascara(mascaraBinaria);
-            let quantidadeEnderecos = calcularQuantidadeEnderecos(quantidadeZeros);
-        
-
             let tabelaResultados = calcularSubredes(enderecoZerado, mascaraBloco, quantidadeSubRedes);
            
             formulario.style.display = "none";
@@ -87,7 +81,7 @@ function zerarUltimoOcteto(enderecoIP) {
     let octetos = enderecoIP.split('.');
     
     if (octetos.length !== 4) {
-        throw new Error('Endereço IP inválido.');
+       console.error('Endereço IP inválido.');
     }
 
     octetos[3] = '0';
@@ -106,7 +100,7 @@ function converteParaBinario(enderecoIP) {
 
 function mascaraSubredeParaBinario(mascara) {
     if (!eMascaraSubredeValida(mascara)) {
-        throw new Error('Máscara de sub-rede inválida.');
+       console.error('Máscara de sub-rede inválida.');
     }
 
     let prefixo = parseInt(mascara.split('/')[1]);
@@ -136,29 +130,36 @@ function calcularQuantidadeEnderecos(quantidadeZeros) {
 function calcularSubredes(ipBase, mascara, numSubredes) {
     let ipBaseArray = ipBase.split('.').map(Number);
     let bitsSubrede = Math.ceil(Math.log2(numSubredes));
-    let hostsPorSubrede = Math.pow(2, 8 - bitsSubrede) - 2;
+    let quantidadeZeros = contarZerosNaMascara(mascaraSubredeParaBinario(mascara));
+    let hostsPorSubrede = Math.pow(2, quantidadeZeros) - 2;
     let subredes = [];
     let incremento = Math.pow(2, 8 - bitsSubrede);
     let enderecoRede = ipBaseArray.slice();
     let broadcastArray = ipBaseArray.slice();
 
     for (let i = 0; i < numSubredes; i++) {
+        // Calcula o endereço de broadcast
         broadcastArray[3] = enderecoRede[3] + incremento - 1;
+        
+        // Ajuste para garantir que o broadcast não ultrapasse o limite da sub-rede
+        if (broadcastArray[3] > 255) {
+            broadcastArray[2] += 1;
+            broadcastArray[3] = 255;
+        }
 
-        let enderecoRedeStr = enderecoRede.join('.');
-        let primeiroHostStr = (enderecoRede[0]) + '.' + (enderecoRede[1]) + '.' + (enderecoRede[2]) + '.' + (enderecoRede[3] + 1);
-        let ultimoHostStr = (broadcastArray[0]) + '.' + (broadcastArray[1]) + '.' + (broadcastArray[2]) + '.' + (broadcastArray[3] - 1);
-        let broadcastStr = broadcastArray.join('.');
+        // Calcular o intervalo de endereços de hosts válidos
+        let primeiroHostStr = `${enderecoRede[0]}.${enderecoRede[1]}.${enderecoRede[2]}.${enderecoRede[3] + 1}`;
+        let ultimoHostStr = `${broadcastArray[0]}.${broadcastArray[1]}.${broadcastArray[2]}.${broadcastArray[3] - 1}`;
 
         subredes.push({
             qtdEstacoes: hostsPorSubrede,
-            enderecosSubRede: `${enderecoRedeStr} - ${ultimoHostStr}`,
-            primeiroEndereco: primeiroHostStr,
-            broadcast: broadcastStr,
+            enderecosSubRede: `${primeiroHostStr} - ${ultimoHostStr}`,
+            primeiroEndereco: `${enderecoRede[0]}.${enderecoRede[1]}.${enderecoRede[2]}.${enderecoRede[3]}`,
+            broadcast: `${broadcastArray[0]}.${broadcastArray[1]}.${broadcastArray[2]}.${broadcastArray[3]}`,
             mascara: mascara
         });
 
-        enderecoRede[3] += incremento;
+        enderecoRede[3] += incremento; 
         broadcastArray[3] += incremento;
     }
 
