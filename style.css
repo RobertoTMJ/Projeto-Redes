@@ -51,10 +51,10 @@ main.container {
 }
 
 form {
-    background-color:var(--cor-texto-botao);
+    background-color: var(--cor-fundo-container);
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px var(--cor-sombra-container);
     width: 40%; 
     min-width: 600px; 
     margin-top: 20px;
@@ -119,16 +119,16 @@ footer {
     border: 1px solid var(--cor-borda-input);
     border-radius: 5px;
     max-width: 800px;
-    background-color:var(--cor-texto-footer);
+    background-color: var(--cor-fundo-container);
 }
 
 .resultado-table th, .resultado-table td {
-    border: 2px solid var(--cor-fundo-header);
+    border: 1px solid var(--cor-borda-input);
     padding: 12px;
     text-align: left;
-    white-space: nowrap; 
 }
 
 .resultado-table th {
-    background-color: var(--cor-texto-botao);
+    background-color: var(--cor-botao);
+    color: var(--cor-texto-botao);
 }
