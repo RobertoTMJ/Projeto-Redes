@@ -12,9 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
         let quantidadeSubRedes = parseInt(formulario.querySelector("#quantidade-subredes").value);
         
         try {
-            // Verifica se a quantidade de sub-redes é negativa
+            // Valida se a quantiade de sub-redes é positiva
             if (quantidadeSubRedes <= 0) {
                 throw new Error("A quantidade de sub-redes deve ser um valor positivo.");
+                // Lança um erro se a sub-rede for negativa
             }
             /**
              * Chama a função para zerar o último octeto do endereço IP.
