@@ -37,7 +37,7 @@ body {
     justify-content: space-between;
     align-items: center;
     font-family: Arial, sans-serif;
-    background-color: var(--cor-fundo-body);
+    background-image: linear-gradient(to bottom, var(--cor-botao-hover), var(--cor-texto-header));
     height: 100vh;
     margin: 0;
     overflow-x: hidden;

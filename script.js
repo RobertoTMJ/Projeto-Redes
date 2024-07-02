@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
         let quantidadeSubRedes = parseInt(formulario.querySelector("#quantidade-subredes").value);
 
         try {
+            // Verifica se a quantidade de sub-redes é negativa
+            if (quantidadeSubRedes <= 0) {
+                throw new Error("A quantidade de sub-redes deve ser um valor positivo.");
+            }
             /**
              * Chama a função para zerar o último octeto do endereço IP.
              * Obtém o endereço IP modificado sem o último octeto,pronto para os outros calculos.
@@ -72,7 +76,8 @@ document.addEventListener("DOMContentLoaded", function() {
             resultadosContainer.style.display = "block";
 
         } catch (error) {
-            console.error(error.message); // Exibe qualquer erro no console do navegador
+            window.alert(error.message); // Exibe qualquer erro no console do navegador
+            return;
         }
     });
 
@@ -97,7 +102,8 @@ function zerarUltimoOcteto(enderecoIP) {
     let octetos = enderecoIP.split('.');
     
     if (octetos.length !== 4) {
-       console.error('Endereço IP inválido.');
+       window.alert('Endereço IP inválido.');
+       return
     }
 
     octetos[3] = '0';
@@ -131,7 +137,8 @@ function converteParaBinario(enderecoIP) {
 
 function mascaraSubredeParaBinario(mascara) {
     if (!eMascaraSubredeValida(mascara)) {
-       console.error('Máscara de sub-rede inválida.');
+       window.alert('Máscara de sub-rede inválida.');
+       return
     }
 
     let prefixo = parseInt(mascara.split('/')[1]);
