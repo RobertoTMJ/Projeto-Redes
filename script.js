@@ -11,13 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
         let mascaraBloco = formulario.querySelector("#mascara").value;
         let quantidadeSubRedes = parseInt(formulario.querySelector("#quantidade-subredes").value);
         
-        // Valida se a quantidade de sub-redes é um número positivo
-        if (quantidadeSubRedes <= 0) {
-            alert('A quantidade de sub-redes deve ser um número positivo.');
-            return; // Para a execução da função se for um número negativo
-        }
-
-
         try {
             // Verifica se a quantidade de sub-redes é negativa
             if (quantidadeSubRedes <= 0) {
